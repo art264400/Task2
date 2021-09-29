@@ -25,7 +25,10 @@ namespace Task2.Controllers
         }
         public IActionResult Index()
         {
-            using (FileStream fs = new FileStream(AppContext.BaseDirectory + "/text.xml", FileMode.Open))
+            var path = AppContext.BaseDirectory + "/text.xml";
+            if (!System.IO.File.Exists(path))
+                return BadRequest();
+            using (FileStream fs = new FileStream(path, FileMode.Open))
             {
                 TextReader reader = new StreamReader(fs);
 
@@ -42,7 +45,7 @@ namespace Task2.Controllers
         [HttpPost]
         public IActionResult Index(PersonalData personalData)
         {
-            
+
             var prsList = new List<PersonalData>();
             prsList.Add(personalData);
             prsList.Add(personalData);
@@ -50,25 +53,11 @@ namespace Task2.Controllers
             {
                 PersonalDatas = prsList
             };
-        var json = JsonSerializer.Serialize<PersonalDataList>(dasdas);
+            var json = JsonSerializer.Serialize<PersonalDataList>(dasdas);
             System.IO.File.WriteAllText(AppContext.BaseDirectory + "/PersonalDataList.json", json);
 
             return View();
         }
-
-
-
-        [HttpGet]
-        public IActionResult New()
-        {
-            return View("_New");
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

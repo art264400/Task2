@@ -22,10 +22,12 @@ namespace Task2.Models
 
         [Required]
         [DisplayName("Добавочный телефон 1")]
+        [RegularExpression(@"^((8 |\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Неправильный номер телефона")]
         public string PhoneNumberFirst { get; set; }
 
         [Required]
         [DisplayName("Добавочный телефон 2")]
+        [RegularExpression(@"^((8 |\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Неправильный номер телефона")]
         public string PhoneNumberSecond { get; set; }
 
         [Required]
