@@ -42,6 +42,7 @@ namespace Task2.Controllers
         [HttpPost]
         public IActionResult Index(PersonalData personalData)
         {
+            
             var prsList = new List<PersonalData>();
             prsList.Add(personalData);
             prsList.Add(personalData);
