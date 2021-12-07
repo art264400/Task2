@@ -5,7 +5,6 @@ using Task2.Attributes;
 
 namespace Task2.Models
 {
-    [PhonesEqual()]
     public class PersonalData
     {
         public Division Division { get; set; }
@@ -25,13 +24,16 @@ namespace Task2.Models
         [RegularExpression(@"^((8 |\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Неправильный номер телефона")]
         public string PhoneNumberFirst { get; set; }
 
+
         [Required]
         [DisplayName("Добавочный телефон 2")]
         [RegularExpression(@"^((8 |\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Неправильный номер телефона")]
+        [PhonesEqual("PhoneNumberFirst")]
         public string PhoneNumberSecond { get; set; }
 
         [Required]
         [DisplayName("Адрес офиса")]
+        [MaxLength(100)]
         public string OfficeAddress { get; set; }
 
         [Required]

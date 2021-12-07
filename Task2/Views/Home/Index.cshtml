@@ -48,6 +48,7 @@
                             <div class="col-sm-10">
                                 <input class="form-control" asp-for="PhoneNumberSecond" />
                                 <span asp-validation-for="PhoneNumberSecond"></span>
+                                <span style="display: none;" class="test">Телефоны должны различаться</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -72,74 +73,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <input id="submit" type="submit" S class="btn btn-primary" value="Отправить" />
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="submit" type="button" class="btn btn-primary">Save changes</button>
-            </div>
+           
         </div>
     </div>
 </div>
-
-@*<div id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div  class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div style="align-self: center;" class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">ЗАПРОС НА ИЗМЕНЕНИЕ ЛИЧНЫХ ДАННЫХ</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div  class="modal-body">
-                    <form id="form" asp-action="Index" asp-controller="Home" asp-antiforgery="true">
-                        <div>
-                            <div>
-                                <label asp-for="DivisionId"></label>
-                                <select asp-for="DivisionId" asp-items="ViewBag.Divisions"></select>
-                                <span asp-validation-for="DivisionId"></span>
-                            </div>
-                            <div>
-                                <label asp-for="PositionId"></label>
-                                <select asp-for="PositionId" asp-items="ViewBag.Positions"></select>
-                                <span asp-validation-for="PositionId"></span>
-                            </div>
-                            <div>
-                                <label asp-for="PhoneNumberFirst"></label>
-                                <input asp-for="PhoneNumberFirst" />
-                                <span asp-validation-for="PhoneNumberFirst"></span>
-                            </div>
-                            <div>
-                                <label asp-for="PhoneNumberSecond"></label>
-                                <input asp-for="PhoneNumberSecond" />
-                                <span asp-validation-for="PhoneNumberSecond"></span>
-                            </div>
-                            <div>
-                                <label asp-for="OfficeAddress"></label>
-                                <input asp-for="OfficeAddress" />
-                                <span asp-validation-for="OfficeAddress"></span>
-                            </div>
-                            <div>
-                                <label asp-for="Cabinet"></label>
-                                <input asp-for="Cabinet" />
-                                <span asp-validation-for="Cabinet"></span>
-                            </div>
-                            <div>
-                                <label asp-for="Comment"></label>
-                                <input asp-for="Comment" />
-                                <span style="color:red;" asp-validation-for="Comment"></span>
-                            </div>
-
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="submit" type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>*@
 
 @section scripts{
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
@@ -149,35 +92,36 @@
     <script>
         $('#PhoneNumberFirst').mask('+7 (999) 999 99 99');
         $('#PhoneNumberSecond').mask('+7 (999) 999 99 99');
-        $('#submit').click(function () {
+        //$('#submit').click(function () {
+        //    var phone = document.getElementById('PhoneNumberFirst');
+        //    var phone2 = document.getElementById('PhoneNumberSecond');
+        //    if (phone.value == phone2.value) {
+        //        return;
+        //    }
+        //    $('#form').submit();                
+        //});
 
-            if ($('#PhoneNumberFirst').val == ($('#PhoneNumberSecond').val)) {
-                alert('Номера одинаковы');
-                $('#PhoneNumberSecond').append("<span class=test>Телефоны должны различаться</span>");
-                /*$('#PhoneNumberSecond-error').val*/
-                return;
-            }
-            $('#form').submit();
-        });
+        //$('#PhoneNumberFirst').keyup(function () {
+        //    var phone = document.getElementById('PhoneNumberFirst');
+        //    var phone2 = document.getElementById('PhoneNumberSecond');
+        //    if (phone.value == phone2.value) {
+        //        $('.test').show();
+        //    }
+        //    else {
+        //        $('.test').hide();
+        //    }
+        //});
 
-        $('#PhoneNumberSecond').val.change(function () {
-            alert("dsadsa");
-            if ($('#PhoneNumberFirst').val == ($('#PhoneNumberSecond').val)) {
-                $('#PhoneNumberSecond').append("<span class=test>Телефоны должны различаться</span>");
-            }
-            else {
-                $('.test').remove();
-            }
-        });
-        $('#PhoneNumberFirst').change(function () {
-            alert("dsadsa");
-            if ($('#PhoneNumberFirst').val == ($('#PhoneNumberSecond').val)) {
-                $('#PhoneNumberSecond').append("<span class=test>Телефоны должны различаться</span>");
-            }
-            else {
-                $('.test').remove();
-            }
-        });
+        //$('#PhoneNumberSecond').keyup(function () {
+        //    var phone = document.getElementById('PhoneNumberFirst');
+        //    var phone2 = document.getElementById('PhoneNumberSecond');
+        //    if (phone.value == phone2.value) {
+        //        $('.test').show();
+        //    }
+        //    else {
+        //        $('.test').hide();
+        //    }
+        //});
     </script>
 }
 
