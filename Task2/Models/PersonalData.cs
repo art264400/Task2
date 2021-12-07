@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Task2.Attributes;
 
 namespace Task2.Models
 {
-    [PhonesEqual()]
     public class PersonalData
     {
         public Division Division { get; set; }
@@ -23,6 +24,7 @@ namespace Task2.Models
         [Required]
         [DisplayName("Добавочный телефон 1")]
         [RegularExpression(@"^((8 |\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Неправильный номер телефона")]
+        [PhonesEqual("PhoneNumberSecond", "Упс, ошибочка")]
         public string PhoneNumberFirst { get; set; }
 
         [Required]
@@ -72,5 +74,11 @@ namespace Task2.Models
     public class PersonalDataList
     {
         public List<PersonalData> PersonalDatas { get; set; }
+    }
+    public class TimerTagHelper : TagHelper
+    {
+        public override void Process(TagHelperContext context, TagHelperOutput output)
+        {
+        }
     }
 }

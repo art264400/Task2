@@ -1486,8 +1486,7 @@ $.extend( $.validator, {
 		},
 
 		// https://jqueryvalidation.org/equalTo-method/
-		equalTo: function( value, element, param ) {
-
+		equalTo: function (value, element, param) {
 			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
 			var target = $( param );
 			if ( this.settings.onfocusout && target.not( ".validate-equalTo-blur" ).length ) {
@@ -1495,7 +1494,14 @@ $.extend( $.validator, {
 					$( element ).valid();
 				} );
 			}
-			return value === target.val();
+			return value !== target.val();
+		},
+
+		notmatch: function (value, element, param) {
+			debugger;
+			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
+			var target = $(param);
+			return value !== target.val();
 		},
 
 		// https://jqueryvalidation.org/remote-method/

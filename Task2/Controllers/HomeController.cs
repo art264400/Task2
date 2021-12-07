@@ -25,6 +25,7 @@ namespace Task2.Controllers
         }
         public IActionResult Index()
         {
+            //var das = new System.Resources.ResourceWriter();
             var path = AppContext.BaseDirectory + "/text.xml";
             if (!System.IO.File.Exists(path))
                 return BadRequest();
@@ -33,7 +34,26 @@ namespace Task2.Controllers
                 TextReader reader = new StreamReader(fs);
 
                 XmlSerializer serializer = new XmlSerializer(typeof(XmlList));
-                var xmlList = (XmlList)serializer.Deserialize(reader);
+                var division1 = new Division
+                {
+                    Id = 1,
+                    Name = "ДКС"
+                };
+                var position1 = new Position
+                {
+                    Id = 1,
+                    Name = "Программист"
+                };
+                var divisions = new List<Division>();
+                divisions.Add(division1);
+                var positions = new List<Position>();
+                positions.Add(position1);
+                var xmlList = new XmlList()
+                {
+                    Divisions = divisions,
+                    Positions = positions
+                };
+                
 
                 ViewBag.Divisions = new SelectList(xmlList.Divisions, "Id", "Name");
                 ViewBag.Positions = new SelectList(xmlList.Positions, "Id", "Name");

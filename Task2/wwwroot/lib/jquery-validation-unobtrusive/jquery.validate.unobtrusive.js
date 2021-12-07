@@ -187,23 +187,23 @@
             if (!form) {  // Cannot do client-side validation without a form
                 return;
             }
-
             valInfo = validationInfo(form);
             valInfo.options.rules[element.name] = rules = {};
             valInfo.options.messages[element.name] = messages = {};
 
             $.each(this.adapters, function () {
+
                 var prefix = "data-val-" + this.name,
                     message = $element.attr(prefix),
                     paramValues = {};
-
+                
                 if (message !== undefined) {  // Compare against undefined, because an empty message is legal (and falsy)
                     prefix += "-";
 
                     $.each(this.params, function () {
                         paramValues[this] = $element.attr(prefix + this);
                     });
-
+                   
                     this.adapt({
                         element: element,
                         form: form,
@@ -377,6 +377,15 @@
             element = $(options.form).find(":input").filter("[name='" + escapeAttributeValue(fullOtherName) + "']")[0];
 
         setValidationValues(options, "equalTo", element);
+    });
+
+    adapters.add("notmatch", ["other"], function (options) {
+        var prefix = getModelPrefix(options.element.name),
+            other = options.params.other,
+            fullOtherName = appendModelPrefix(other, prefix),
+            element = $(options.form).find(":input").filter("[name='" + escapeAttributeValue(fullOtherName) + "']")[0];
+
+        setValidationValues(options, "notmatch", element);
     });
     adapters.add("required", function (options) {
         // jQuery Validate equates "required" with "mandatory" for checkbox elements
