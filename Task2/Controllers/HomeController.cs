@@ -25,49 +25,21 @@ namespace Task2.Controllers
         }
         public IActionResult Index()
         {
-            //var das = new System.Resources.ResourceWriter();
-            var path = AppContext.BaseDirectory + "/text.xml";
-            if (!System.IO.File.Exists(path))
-                return BadRequest();
-            using (FileStream fs = new FileStream(path, FileMode.Open))
-            {
-                TextReader reader = new StreamReader(fs);
-
-                XmlSerializer serializer = new XmlSerializer(typeof(XmlList));
-                var division1 = new Division
-                {
-                    Id = 1,
-                    Name = "ДКС"
-                };
-                var position1 = new Position
-                {
-                    Id = 1,
-                    Name = "Программист"
-                };
-                var divisions = new List<Division>();
-                divisions.Add(division1);
-                var positions = new List<Position>();
-                positions.Add(position1);
-                var xmlList = new XmlList()
-                {
-                    Divisions = divisions,
-                    Positions = positions
-                };
-                
-
-                ViewBag.Divisions = new SelectList(xmlList.Divisions, "Id", "Name");
-                ViewBag.Positions = new SelectList(xmlList.Positions, "Id", "Name");
-            }
-
+            var xmlList = setDivAndPos();
+            if (xmlList == null) return BadRequest();
+            ViewBag.Divisions = new SelectList(xmlList.Divisions, "Id", "Name");
+            ViewBag.Positions = new SelectList(xmlList.Positions, "Id", "Name");
             return View(new PersonalData());
         }
 
         [HttpPost]
         public IActionResult Index(PersonalData personalData)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var prsList = new List<PersonalData>();
-            prsList.Add(personalData);
             prsList.Add(personalData);
             var dasdas = new PersonalDataList()
             {
@@ -76,12 +48,35 @@ namespace Task2.Controllers
             var json = JsonSerializer.Serialize<PersonalDataList>(dasdas);
             System.IO.File.WriteAllText(AppContext.BaseDirectory + "/PersonalDataList.json", json);
 
-            return View();
+            return RedirectToAction("Index");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private XmlList setDivAndPos()
+        {
+            try
+            {
+                var path = AppContext.BaseDirectory + "/text.xml";
+                if (!System.IO.File.Exists(path))
+                    return null;
+                using (FileStream fs = new FileStream(path, FileMode.Open))
+                {
+                    TextReader reader = new StreamReader(fs);
+
+                    XmlSerializer serializer = new XmlSerializer(typeof(XmlList));
+                    var xmlList = (XmlList)serializer.Deserialize(reader);
+                    return xmlList;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
         }
     }
 }

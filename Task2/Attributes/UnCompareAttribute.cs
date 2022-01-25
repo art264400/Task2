@@ -2,21 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Reflection;
-using Task2.Models;
 
 namespace Task2.Attributes
 {
-    public class PhonesEqualAttribute : ValidationAttribute, IClientModelValidator
+    public class UnCompareAttribute : ValidationAttribute, IClientModelValidator
     {
         private string OtherProperty { get; set; }
-        public PhonesEqualAttribute(string otherProperty)
+        public UnCompareAttribute(string otherProperty)
         {
             OtherProperty = otherProperty;
             ErrorMessage = "Телефоны не должны совпадать";
         }
-        public PhonesEqualAttribute(string otherProperty, string errorMessage)
+        public UnCompareAttribute(string otherProperty, string errorMessage)
         {
             OtherProperty=otherProperty;
             ErrorMessage = errorMessage;
@@ -29,8 +27,8 @@ namespace Task2.Attributes
                 throw new ArgumentNullException(nameof(context));
             }
             MergeAttribute(context.Attributes, "data-val", "true");
-            MergeAttribute(context.Attributes, "data-val-notmatch", ErrorReturn(context));
-            MergeAttribute(context.Attributes, "data-val-notmatch-other", OtherProperty);
+            MergeAttribute(context.Attributes, "data-val-uncompare", ErrorMessage);
+            MergeAttribute(context.Attributes, "data-val-uncompare-other", OtherProperty);
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
@@ -48,19 +46,6 @@ namespace Task2.Attributes
           
             return ValidationResult.Success;
         }
-        private string ErrorReturn(ClientModelValidationContext context)
-        {
-            var atribute = context
-           .ModelMetadata
-           .ValidatorMetadata
-           .OfType<PhonesEqualAttribute>()
-           .SingleOrDefault();
-
-            var message = atribute.FormatErrorMessage(
-                context.ModelMetadata.PropertyName);
-            return message;
-        }
-
         private bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
         {
             if (attributes.ContainsKey(key))

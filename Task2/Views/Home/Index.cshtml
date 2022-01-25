@@ -84,61 +84,12 @@
 
 @section scripts{
 
-<script src="~/lib/jquery-validation/dist/jquery.validate.js?v.1"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js?v.1"></script>
+<script asp-append-version="true" src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script asp-append-version="true" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js?v.2"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
 <script>
     $('#PhoneNumberFirst').mask('+7 (999) 999 99 99');
     $('#PhoneNumberSecond').mask('+7 (999) 999 99 99');
-    // (function ($) {
-    //    var $jQval = $.validator;
-    //    $jQval.addMethod('iseven', function (value, element, params) {
-    //        debugger;
-    //        if (!value) {
-    //            return true;
-    //        }
-    //        value = parseFloat($.trim(value));
-    //        if (!value) {
-    //            return true;
-    //        }
-    //        var isEven = (value % 2) === 0;
-    //        return isEven;
-    //    });
-
-    //    var adapters = $jQval.unobtrusive.adapters;
-    //    adapters.addBool('iseven');
-    //})(jQuery);
-    //$('#submit').click(function () {
-
-    //    //if ($('#PhoneNumberFirst').val == ($('#PhoneNumberSecond').val)) {
-    //    //    alert('Номера одинаковы');
-    //    //    $('#PhoneNumberSecond').append("<span class=test>Телефоны должны различаться</span>");
-    //    //    /*$('#PhoneNumberSecond-error').val*/
-    //    //    return;
-    //    //}
-    //    debugger;
-
-    //    $('#form').submit();
-    //});
-
-    //$('#PhoneNumberSecond').val.change(function () {
-    //    alert("dsadsa");
-    //    if ($('#PhoneNumberFirst').val == ($('#PhoneNumberSecond').val)) {
-    //        $('#PhoneNumberSecond').append("<span class=test>Телефоны должны различаться</span>");
-    //    }
-    //    else {
-    //        $('.test').remove();
-    //    }
-    //});
-    //$('#PhoneNumberFirst').change(function () {
-    //    alert("dsadsa");
-    //    if ($('#PhoneNumberFirst').val == ($('#PhoneNumberSecond').val)) {
-    //        $('#PhoneNumberSecond').append("<span class=test>Телефоны должны различаться</span>");
-    //    }
-    //    else {
-    //        $('.test').remove();
-    //    }
-    //});
 </script>
 }
 

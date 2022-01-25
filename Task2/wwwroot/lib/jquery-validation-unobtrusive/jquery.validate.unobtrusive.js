@@ -379,13 +379,13 @@
         setValidationValues(options, "equalTo", element);
     });
 
-    adapters.add("notmatch", ["other"], function (options) {
+    adapters.add("uncompare", ["other"], function (options) {
         var prefix = getModelPrefix(options.element.name),
             other = options.params.other,
             fullOtherName = appendModelPrefix(other, prefix),
             element = $(options.form).find(":input").filter("[name='" + escapeAttributeValue(fullOtherName) + "']")[0];
 
-        setValidationValues(options, "notmatch", element);
+        setValidationValues(options, "uncompare", element);
     });
     adapters.add("required", function (options) {
         // jQuery Validate equates "required" with "mandatory" for checkbox elements

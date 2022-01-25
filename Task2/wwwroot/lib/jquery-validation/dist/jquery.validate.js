@@ -1497,9 +1497,7 @@ $.extend( $.validator, {
 			return value !== target.val();
 		},
 
-		notmatch: function (value, element, param) {
-			debugger;
-			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
+		uncompare: function (value, element, param) {
 			var target = $(param);
 			return value !== target.val();
 		},

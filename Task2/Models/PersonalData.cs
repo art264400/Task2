@@ -24,7 +24,7 @@ namespace Task2.Models
         [Required]
         [DisplayName("Добавочный телефон 1")]
         [RegularExpression(@"^((8 |\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Неправильный номер телефона")]
-        [PhonesEqual("PhoneNumberSecond", "Упс, ошибочка")]
+        [UnCompare("PhoneNumberSecond", "Упс, ошибочка")]
         public string PhoneNumberFirst { get; set; }
 
         [Required]
